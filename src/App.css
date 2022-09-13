@@ -1,5 +1,7 @@
+@import url(https://fonts.google.com/specimen/Indie+Flower?category=Handwriting);
 .App {
   text-align: center;
+  font-family: IndieFlower;
 }
 
 .App-logo {
