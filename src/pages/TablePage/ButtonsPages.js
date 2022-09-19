@@ -12,6 +12,7 @@ export const SubmitButton = () => {
           height: "20px",
           fontSize: "10px",
         }}
+        type="submit"
       >
         Submit
       </Button>

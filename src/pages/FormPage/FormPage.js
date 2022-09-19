@@ -5,12 +5,18 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
 import React from "react";
 import { useFormik } from "formik";
 import { ResetButton, SubmitButton } from "../TablePage/ButtonsPages";
 export const FormPage = () => {
   const form = useFormik({
-    initialValues: { email: "", password: "" },
+    initialValues: {
+      Firstname: "",
+      Lastname: "",
+      mobile: "",
+      email: "",
+    },
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       alert("you are successfully logged in");
@@ -45,27 +51,39 @@ export const FormPage = () => {
       }}
     >
       <br></br>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        sx={{ backgroundColor: "#A10035", color: "#FFE7BF", margin: "#FFE7BF" }}
+      >
         Open form
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Please fill the form</DialogTitle>
+      <Dialog open={open}>
+        <CancelIcon
+          onClick={handleClose}
+          sx={{
+            color: "red",
+          }}
+        ></CancelIcon>
+        <DialogTitle
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
+          Please fill the form
+        </DialogTitle>
         <DialogContent>
-          <form onSubmit={form.handleSubmit} className="form">
-            <TextField
-              id="standard-basic"
-              label="Id"
-              variant="standard"
-              type="number"
-              name="Id"
-            />
-            <br></br>
+          <form className="form" onSubmit={form.handleSubmit}>
             <TextField
               id="standard-basic"
               label="Firstname"
               variant="standard"
               type="string"
               name="Firstname"
+              onChange={form.handleChange}
+              value={form.values.Firstname}
             />
             <br></br>
             <TextField
@@ -74,6 +92,8 @@ export const FormPage = () => {
               variant="standard"
               type="string"
               name="Lastname"
+              onChange={form.handleChange}
+              value={form.values.Lastname}
             />
             <br></br>
             <TextField
@@ -82,6 +102,8 @@ export const FormPage = () => {
               variant="standard"
               type="number"
               name="mobile"
+              onChange={form.handleChange}
+              value={form.values.mobile}
             />
             <br></br>
 
@@ -94,14 +116,24 @@ export const FormPage = () => {
               onChange={form.handleChange}
               value={form.values.email}
             />
+            <br></br>
             {form.errors.email ? (
               <div className="email">{form.errors.email}</div>
             ) : null}
             <br></br>
-            <p>
-              <ResetButton />
-              <SubmitButton />
-            </p>
+            <SubmitButton />
+            <br></br>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "green",
+                width: "20px",
+                height: "20px",
+                fontSize: "10px",
+              }}
+            >
+              Reset
+            </Button>
           </form>
         </DialogContent>
       </Dialog>
