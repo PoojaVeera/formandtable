@@ -35,24 +35,23 @@ export const ResetButton = () => {
     </div>
   );
 };
-export const DeleteButton = () => {
-  return (
-    <div>
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor: "blue",
-          width: "12px",
-          height: "15px",
-          fontSize: "10px",
-        }}
-        onClick={() => alert("deleted")}
-      >
-        Delete
-      </Button>
-    </div>
-  );
-};
+// export const DeleteButton = () => {
+//   return (
+//     <div>
+//       <Button
+//         variant="contained"
+//         sx={{
+//           backgroundColor: "blue",
+//           width: "12px",
+//           height: "15px",
+//           fontSize: "10px",
+//         }}
+//       >
+//         Delete
+//       </Button>
+//     </div>
+//   );
+// };
 export const EditButton = () => {
   return (
     <div>

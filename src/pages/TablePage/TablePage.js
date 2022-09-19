@@ -4,36 +4,37 @@ import {
   TableContainer,
   TableHead,
   Paper,
+  Button,
 } from "@mui/material";
 import { v4 as uuid } from "uuid";
 import React, { useState } from "react";
-import { AddNewButton, DeleteButton, EditButton } from "./ButtonsPages";
+import { AddNewButton, EditButton } from "./ButtonsPages";
 import { StyledTableRow, StyledTableCell, TABLEPage } from "./TablePage.styles";
 
 export const TablePage = () => {
-  const [rowsData, setrowsData] = useState(
+  const [rowsData, setrowsData] = useState([
     {
-      Id: uuid,
+      Id: uuid(),
       Firstname: "pooja",
       Lastname: "veeranki",
       mobile: 39256037486,
       email: "ajkdhjh",
     },
     {
-      Id: uuid,
+      Id: uuid(),
       Firstname: "udhay",
       Lastname: "nidhi",
       mobile: 4370635,
       email: "ldfjk",
     },
     {
-      Id: uuid,
+      Id: uuid(),
       Firstname: "aaisha",
       Lastname: "jameela",
       mobile: 7657834,
       email: "uagsdfg",
-    }
-  );
+    },
+  ]);
   const deleteTask = (Id) => {
     const delTask = [...rowsData];
     delTask.splice(Id, 1);
@@ -57,7 +58,7 @@ export const TablePage = () => {
             <StyledTableCell />
           </TableHead>
           <TableBody>
-            {rowsData.map((row, Id) => (
+            {rowsData.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
                   {row.Id}
@@ -65,9 +66,20 @@ export const TablePage = () => {
                 <StyledTableCell>{row.Firstname}</StyledTableCell>
                 <StyledTableCell>{row.Lastname}</StyledTableCell>
                 <StyledTableCell>{row.mobile}</StyledTableCell>
-                <StyledTableCell>{row.emailId}</StyledTableCell>
+                <StyledTableCell>{row.email}</StyledTableCell>
                 <StyledTableCell>
-                  <DeleteButton />
+                  <Button
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "blue",
+                      width: "12px",
+                      height: "15px",
+                      fontSize: "10px",
+                    }}
+                    onClick={deleteTask}
+                  >
+                    Delete
+                  </Button>
                 </StyledTableCell>
                 <StyledTableCell>
                   <EditButton />
