@@ -38,7 +38,13 @@ export const FormPage = () => {
     setOpen(false);
   };
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <br></br>
       <Button variant="outlined" onClick={handleClickOpen}>
         Open form
       </Button>

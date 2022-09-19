@@ -5,22 +5,46 @@ import {
   TableHead,
   Paper,
 } from "@mui/material";
-import React from "react";
+import { v4 as uuid } from "uuid";
+import React, { useState } from "react";
 import { AddNewButton, DeleteButton, EditButton } from "./ButtonsPages";
-import { StyledTableRow, StyledTableCell } from "./TablePage.styles";
-function datainTable(Id, Firstname, Lastname, mobile, emailId) {
-  return { Id, Firstname, Lastname, mobile, emailId };
-}
-const rowsData = [
-  datainTable(1, "pooja", "veeranki", 39256037486, "ajkdhjh"),
-  datainTable(2, "udhay", "nidhi", 4370635, "ldfjk"),
-  datainTable(3, "aaisha", "jameela", 7657834, "uagsdfg"),
-];
+import { StyledTableRow, StyledTableCell, TABLEPage } from "./TablePage.styles";
 
 export const TablePage = () => {
+  const [rowsData, setrowsData] = useState(
+    {
+      Id: uuid,
+      Firstname: "pooja",
+      Lastname: "veeranki",
+      mobile: 39256037486,
+      email: "ajkdhjh",
+    },
+    {
+      Id: uuid,
+      Firstname: "udhay",
+      Lastname: "nidhi",
+      mobile: 4370635,
+      email: "ldfjk",
+    },
+    {
+      Id: uuid,
+      Firstname: "aaisha",
+      Lastname: "jameela",
+      mobile: 7657834,
+      email: "uagsdfg",
+    }
+  );
+  const deleteTask = (Id) => {
+    const delTask = [...rowsData];
+    delTask.splice(Id, 1);
+    setrowsData(delTask);
+    console.log("task deleted");
+  };
   return (
-    <div>
+    <TABLEPage>
+      <br></br>
       <AddNewButton />
+      <br></br>
       <TableContainer component={Paper} align="center">
         <Table size="small" sx={{ minWidth: 650 }}>
           <TableHead>
@@ -33,7 +57,7 @@ export const TablePage = () => {
             <StyledTableCell />
           </TableHead>
           <TableBody>
-            {rowsData.map((row) => (
+            {rowsData.map((row, Id) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
                   {row.Id}
@@ -53,6 +77,6 @@ export const TablePage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </TABLEPage>
   );
 };
