@@ -1,15 +1,24 @@
+import React from "react";
+import { SubmitButton } from "../TablePage/ButtonsPages";
+import { useFormik } from "formik";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Button,
   TextField,
+  Grid,
+  Button,
 } from "@mui/material";
-import CancelIcon from "@mui/icons-material/Cancel";
-import React from "react";
-import { useFormik } from "formik";
-import { ResetButton, SubmitButton } from "../TablePage/ButtonsPages";
 export const FormPage = () => {
+  const [Values, setValues] = useState({
+    Firstname: "",
+    Lastname: "",
+    mobile: "",
+    email: "",
+  });
+  console.log(Values);
   const form = useFormik({
     initialValues: {
       Firstname: "",
@@ -17,13 +26,26 @@ export const FormPage = () => {
       mobile: "",
       email: "",
     },
+
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       alert("you are successfully logged in");
       resetForm();
+      setValues(values);
+      console.log(setValues);
     },
     validate: (values) => {
       let errors = {};
+
+      if (!values.Firstname) {
+        errors.Firstname = "required";
+      }
+      if (!values.Lastname) {
+        errors.Lastname = "required";
+      }
+      if (!values.mobile) {
+        errors.mobile = "required";
+      }
       if (!values.email) {
         errors.email = "email required";
       } else if (
@@ -85,6 +107,9 @@ export const FormPage = () => {
               onChange={form.handleChange}
               value={form.values.Firstname}
             />
+            {form.errors.Firstname ? (
+              <div className="Firstname">{form.errors.Firstname}</div>
+            ) : null}
             <br></br>
             <TextField
               id="standard-basic"
@@ -95,6 +120,9 @@ export const FormPage = () => {
               onChange={form.handleChange}
               value={form.values.Lastname}
             />
+            {form.errors.Lastname ? (
+              <div className="Lastname">{form.errors.Lastname}</div>
+            ) : null}
             <br></br>
             <TextField
               id="standard-basic"
@@ -105,6 +133,9 @@ export const FormPage = () => {
               onChange={form.handleChange}
               value={form.values.mobile}
             />
+            {form.errors.mobile ? (
+              <div className="mobile">{form.errors.mobile}</div>
+            ) : null}
             <br></br>
 
             <TextField
@@ -121,22 +152,35 @@ export const FormPage = () => {
               <div className="email">{form.errors.email}</div>
             ) : null}
             <br></br>
-            <SubmitButton />
-            <br></br>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "green",
-                width: "20px",
-                height: "20px",
-                fontSize: "10px",
-              }}
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              item
+              xs={15}
+              columnGap="20px"
             >
-              Reset
-            </Button>
+              <SubmitButton />
+
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "green",
+                  width: "20px",
+                  height: "20px",
+                  fontSize: "10px",
+                }}
+                type="reset"
+                onClick={form.resetForm}
+              >
+                Reset
+              </Button>
+            </Grid>
           </form>
         </DialogContent>
       </Dialog>
+      );
     </div>
   );
 };

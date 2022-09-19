@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { FormPage } from "../FormPage/FormPage";
 export const SubmitButton = () => {
   return (
     <div>
@@ -36,23 +35,7 @@ export const ResetButton = () => {
     </div>
   );
 };
-// export const DeleteButton = () => {
-//   return (
-//     <div>
-//       <Button
-//         variant="contained"
-//         sx={{
-//           backgroundColor: "blue",
-//           width: "12px",
-//           height: "15px",
-//           fontSize: "10px",
-//         }}
-//       >
-//         Delete
-//       </Button>
-//     </div>
-//   );
-// };
+//
 export const EditButton = () => {
   return (
     <div>
@@ -75,7 +58,7 @@ export const EditButton = () => {
 export const AddNewButton = () => {
   return (
     <div>
-      <Button variant="contained" onClick={() => FormPage()}>
+      <Button variant="contained" onClick={() => alert("new")}>
         add member
       </Button>
     </div>
