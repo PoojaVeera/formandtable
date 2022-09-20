@@ -31,7 +31,7 @@ export const FormPage = () => {
       axios
         .post(
           "https://crudformandtable-default-rtdb.asia-southeast1.firebasedatabase.app/register",
-          values
+          Values
         )
         .then(() => alert("successfully entered db"));
       console.log(values);
