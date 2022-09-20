@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SubmitButton } from "../TablePage/ButtonsPages";
 import { useFormik } from "formik";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useState } from "react";
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -18,7 +19,6 @@ export const FormPage = () => {
     mobile: "",
     email: "",
   });
-  console.log(Values);
   const form = useFormik({
     initialValues: {
       Firstname: "",
@@ -28,6 +28,12 @@ export const FormPage = () => {
     },
 
     onSubmit: (values, { resetForm }) => {
+      axios
+        .post(
+          "https://crudformandtable-default-rtdb.asia-southeast1.firebasedatabase.app/register",
+          values
+        )
+        .then(() => alert("successfully entered db"));
       console.log(values);
       alert("you are successfully logged in");
       resetForm();
