@@ -5,17 +5,17 @@ export const Navbar = () => {
     <>
       <Nav>
         <NavBtn>
-          <NavBtnLink to="/" activeStyle>
+          <NavBtnLink to="/" activestyle="true">
             HOME
           </NavBtnLink>
         </NavBtn>
         <NavBtn>
-          <NavBtnLink to="/FormPage" activeStyle>
+          <NavBtnLink to="/FormPage" activestyle="true">
             FORM
           </NavBtnLink>
         </NavBtn>
         <NavBtn>
-          <NavBtnLink to="/TablePage" activeStyle>
+          <NavBtnLink to="/TablePage" activestyle="true">
             TABLE
           </NavBtnLink>
         </NavBtn>
