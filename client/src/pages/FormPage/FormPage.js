@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import { SubmitButton } from "../TablePage/ButtonsPages";
 import { useFormik } from "formik";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -57,7 +58,7 @@ export const FormPage = () => {
       if (!values.Email) {
         errors.Email = "email required";
       } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.Email)
       ) {
         errors.Email = "Invalid email address";
       }

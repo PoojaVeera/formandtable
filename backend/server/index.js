@@ -17,7 +17,7 @@ const db = mysql.createConnection({
 app.post("/formdata", (req, res) => {
   const Firstname = req.body.Firstname;
   const Lastname = req.body.Lastname;
-  const Mobile = req.body.Mobile;
+  const Mobile = req.body.mobile;
   const Email = req.body.Email;
 
   db.query(
