@@ -3,7 +3,6 @@ import { SubmitButton } from "../TablePage/ButtonsPages";
 import { useFormik } from "formik";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useState } from "react";
-import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -16,24 +15,27 @@ export const FormPage = () => {
   const [Values, setValues] = useState({
     Firstname: "",
     Lastname: "",
-    mobile: "",
-    email: "",
+    Mobile: "",
+    Email: "",
   });
   const form = useFormik({
     initialValues: {
       Firstname: "",
       Lastname: "",
-      mobile: "",
-      email: "",
+      Mobile: "",
+      Email: "",
     },
 
     onSubmit: (values, { resetForm }) => {
       axios
-        .post(
-          "https://crudformandtable-default-rtdb.asia-southeast1.firebasedatabase.app/register",
-          Values
-        )
-        .then(() => alert("successfully entered db"));
+        .post("http://localhost:3001/formdata", {
+          Firstname: Firstname,
+          Lastname: Lastname,
+          Mobile: Mobile,
+          Email: Email,
+        })
+        .then(() => alert("data logged successfully"));
+
       console.log(values);
       alert("you are successfully logged in");
       resetForm();
@@ -49,15 +51,15 @@ export const FormPage = () => {
       if (!values.Lastname) {
         errors.Lastname = "required";
       }
-      if (!values.mobile) {
-        errors.mobile = "required";
+      if (!values.Mobile) {
+        errors.Mobile = "required";
       }
-      if (!values.email) {
-        errors.email = "email required";
+      if (!values.Email) {
+        errors.Email = "email required";
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
       ) {
-        errors.email = "Invalid email address";
+        errors.Email = "Invalid email address";
       }
 
       return errors;
@@ -135,12 +137,12 @@ export const FormPage = () => {
               label="mobile"
               variant="standard"
               type="number"
-              name="mobile"
+              name="Mobile"
               onChange={form.handleChange}
-              value={form.values.mobile}
+              value={form.values.Mobile}
             />
-            {form.errors.mobile ? (
-              <div className="mobile">{form.errors.mobile}</div>
+            {form.errors.Mobile ? (
+              <div className="mobile">{form.errors.Mobile}</div>
             ) : null}
             <br></br>
 
@@ -148,14 +150,14 @@ export const FormPage = () => {
               id="standard-basic"
               label="Email"
               variant="standard"
-              type="email"
-              name="email"
+              type="Email"
+              name="Email"
               onChange={form.handleChange}
-              value={form.values.email}
+              value={form.values.Email}
             />
             <br></br>
-            {form.errors.email ? (
-              <div className="email">{form.errors.email}</div>
+            {form.errors.Email ? (
+              <div className="email">{form.errors.Email}</div>
             ) : null}
             <br></br>
             <Grid
@@ -186,7 +188,6 @@ export const FormPage = () => {
           </form>
         </DialogContent>
       </Dialog>
-      );
     </div>
   );
 };
