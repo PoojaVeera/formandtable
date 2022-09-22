@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { SubmitButton } from "../TablePage/ButtonsPages";
 import { useFormik } from "formik";
@@ -13,12 +13,27 @@ import {
   Button,
 } from "@mui/material";
 export const FormPage = () => {
-  const [Values, setValues] = useState({
-    Firstname: "",
-    Lastname: "",
-    Mobile: "",
-    Email: "",
-  });
+  // const [Values, setValues] = useState({
+  //   Firstname: "",
+  //   Lastname: "",
+  //   Mobile: "",
+  //   Email: "",
+  // });
+  const [Firstname, setFirstname] = useState("");
+  const [Lastname, setLastname] = useState("");
+  const [Mobile, setMobile] = useState("");
+  const [Email, setEmail] = useState("");
+  const handleSubmit = (e) => {
+    axios
+      .post("http://localhost:3001/formdata", {
+        Firstname: Firstname,
+        Lastname: Lastname,
+        Mobile: Mobile,
+        Email: Email,
+      })
+      .then(() => alert("data logged successfully"));
+  };
+
   const form = useFormik({
     initialValues: {
       Firstname: "",
@@ -27,22 +42,22 @@ export const FormPage = () => {
       Email: "",
     },
 
-    onSubmit: (values, { resetForm }) => {
-      axios
-        .post("http://localhost:3001/formdata", {
-          Firstname: Firstname,
-          Lastname: Lastname,
-          Mobile: Mobile,
-          Email: Email,
-        })
-        .then(() => alert("data logged successfully"));
+    // onSubmit: (values, { resetForm }) => {
+    //   axios
+    //     .post("http://localhost:3001/formdata", {
+    //       Firstname: Firstname,
+    //       Lastname: Lastname,
+    //       Mobile: Mobile,
+    //       Email: Email,
+    //     })
+    //     .then(() => alert("data logged successfully"));
 
-      console.log(values);
-      alert("you are successfully logged in");
-      resetForm();
-      setValues(values);
-      console.log(setValues);
-    },
+    //   console.log(values);
+    //   alert("you are successfully logged in");
+    //   resetForm();
+    //   // setValues(values);
+    //   // console.log(setValues);
+    // },
     validate: (values) => {
       let errors = {};
 
@@ -106,15 +121,16 @@ export const FormPage = () => {
           Please fill the form
         </DialogTitle>
         <DialogContent>
-          <form className="form" onSubmit={form.handleSubmit}>
+          <form className="form" onSubmit={handleSubmit}>
             <TextField
               id="standard-basic"
               label="Firstname"
               variant="standard"
               type="string"
               name="Firstname"
-              onChange={form.handleChange}
-              value={form.values.Firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+              // onChange={form.handleChange}
+              // value={form.values.Firstname}
             />
             {form.errors.Firstname ? (
               <div className="Firstname">{form.errors.Firstname}</div>
@@ -126,8 +142,10 @@ export const FormPage = () => {
               variant="standard"
               type="string"
               name="Lastname"
-              onChange={form.handleChange}
-              value={form.values.Lastname}
+              onChange={(e) => setLastname(e.target.value)}
+
+              // onChange={form.handleChange}
+              // value={form.values.Lastname}
             />
             {form.errors.Lastname ? (
               <div className="Lastname">{form.errors.Lastname}</div>
@@ -139,8 +157,10 @@ export const FormPage = () => {
               variant="standard"
               type="number"
               name="Mobile"
-              onChange={form.handleChange}
-              value={form.values.Mobile}
+              onChange={(e) => setMobile(e.target.value)}
+
+              // onChange={form.handleChange}
+              // value={form.values.Mobile}
             />
             {form.errors.Mobile ? (
               <div className="mobile">{form.errors.Mobile}</div>
@@ -153,8 +173,10 @@ export const FormPage = () => {
               variant="standard"
               type="Email"
               name="Email"
-              onChange={form.handleChange}
-              value={form.values.Email}
+              onChange={(e) => setEmail(e.target.value)}
+
+              // onChange={form.handleChange}
+              // value={form.values.Email}
             />
             <br></br>
             {form.errors.Email ? (
