@@ -4,6 +4,7 @@ import { FormPage } from "./pages/FormPage/FormPage";
 import Homepage from "./pages/HomePage/HomePage";
 import { TablePage } from "./pages/TablePage/TablePage";
 import { Navbar } from "./components/Layout";
+
 function App() {
   return (
     <div className="App">

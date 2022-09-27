@@ -11,7 +11,7 @@ export const SubmitButton = () => {
           height: "20px",
           fontSize: "10px",
         }}
-        type="submit"
+        type="button"
       >
         Submit
       </Button>
@@ -36,25 +36,7 @@ export const ResetButton = () => {
   );
 };
 //
-export const EditButton = () => {
-  return (
-    <div>
-      <Button
-        variant="contained"
-        size="small"
-        sx={{
-          backgroundColor: "green",
-          width: "12px",
-          height: "15px",
-          fontSize: "10px",
-        }}
-        onClick={() => alert("Edited")}
-      >
-        Edit
-      </Button>
-    </div>
-  );
-};
+
 export const AddNewButton = () => {
   return (
     <div>

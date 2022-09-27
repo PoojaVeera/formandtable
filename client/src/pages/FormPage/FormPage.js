@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { SubmitButton } from "../TablePage/ButtonsPages";
 import { useFormik } from "formik";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useState } from "react";
@@ -13,25 +12,22 @@ import {
   Button,
 } from "@mui/material";
 export const FormPage = () => {
-  // const [Values, setValues] = useState({
-  //   Firstname: "",
-  //   Lastname: "",
-  //   Mobile: "",
-  //   Email: "",
-  // });
   const [Firstname, setFirstname] = useState("");
   const [Lastname, setLastname] = useState("");
   const [Mobile, setMobile] = useState("");
   const [Email, setEmail] = useState("");
   const handleSubmit = (e) => {
+    e.preventDefault();
     axios
-      .post("http://localhost:3001/formdata", {
+      .post("http://localhost:3001/create", {
         Firstname: Firstname,
         Lastname: Lastname,
         Mobile: Mobile,
         Email: Email,
       })
-      .then(() => alert("data logged successfully"));
+      .then(() => {
+        alert("data logged successfully");
+      });
   };
 
   const form = useFormik({
@@ -121,7 +117,7 @@ export const FormPage = () => {
           Please fill the form
         </DialogTitle>
         <DialogContent>
-          <form className="form" onSubmit={handleSubmit}>
+          <form className="form">
             <TextField
               id="standard-basic"
               label="Firstname"
@@ -143,7 +139,6 @@ export const FormPage = () => {
               type="string"
               name="Lastname"
               onChange={(e) => setLastname(e.target.value)}
-
               // onChange={form.handleChange}
               // value={form.values.Lastname}
             />
@@ -192,12 +187,23 @@ export const FormPage = () => {
               xs={15}
               columnGap="20px"
             >
-              <SubmitButton />
-
               <Button
                 variant="contained"
                 sx={{
                   backgroundColor: "green",
+                  width: "20px",
+                  height: "20px",
+                  fontSize: "10px",
+                }}
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "red",
                   width: "20px",
                   height: "20px",
                   fontSize: "10px",

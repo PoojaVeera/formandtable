@@ -12,15 +12,17 @@ const db = mysql.createConnection({
   password: "Root@123",
   database: "crudappserver",
 });
-console.log(db, "this is db");
-app.post("/formdata", (req, res) => {
+
+app.post("/create", (req, res) => {
+  console.log("this is test");
   const Firstname = req.body.Firstname;
   const Lastname = req.body.Lastname;
   const Mobile = req.body.Mobile;
   const Email = req.body.Email;
+  res.send("this is send");
 
   db.query(
-    "INSERT INTO details (Firstname,Lastname,Mobile,Email) VALUES('abc','jkd',8667,'ajs@mail.com')",
+    "INSERT INTO details (Firstname,Lastname,Mobile,Email) VALUES(?,?,?,?)",
     [Firstname, Lastname, Mobile, Email],
     (err, result) => {
       if (err) {
@@ -31,15 +33,34 @@ app.post("/formdata", (req, res) => {
     }
   );
 });
+
+app.get("/employees", (req, res) => {
+  db.query("SELECT * FROM details", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//
+
+//   const Id = req.body.Id;
+//   const Firstname = req.body.Firstname;
+//   db.query(
+//     "UPDATE employees SET Firstname=? WHERE id=?",
+//     [Firstname, Id],
+//     (err, result) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         res.send(result);
+//       }
+//     }
+//   );
+// });
 app.listen(3001, () => {
   console.log("yay! server is running on port 3001");
 });
 // const PORT = process.env.PORT || 3001;
-
-// app.get("/api", (req, res) => {
-//   res.json({ message: "Hello from server!" });
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server listening on ${PORT}`);
-// });
